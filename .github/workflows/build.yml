@@ -16,8 +16,14 @@ jobs:
           xcodebuild -version
           xcrun --sdk iphoneos --show-sdk-path
           xcrun --sdk iphoneos --find clang
+      - name: Preparar OpenSSL
+        run: |
+          brew install openssl@3
+          echo "OPENSSL_ROOT=$(brew --prefix openssl@3)" >> "$GITHUB_ENV"
 
       - name: Intentar compilar
         run: |
           make clean || true
-          make V=1
+          make V=1 \
+            CPPFLAGS="-I$OPENSSL_ROOT/include" \
+            LDFLAGS="-L$OPENSSL_ROOT/lib"
