@@ -1,1 +1,23 @@
+name: Compilar Aircrack-ng para iPhone
 
+on:
+  workflow_dispatch:
+
+jobs:
+  compilar:
+    runs-on: macos-14
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Comprobar entorno
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-path
+          xcrun --sdk iphoneos --find clang
+
+      - name: Intentar compilar
+        run: |
+          make clean || true
+          make V=1
