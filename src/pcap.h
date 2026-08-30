@@ -55,7 +55,6 @@
 
 #define uchar  unsigned char
 #define ushort unsigned short
-#define uint   unsigned int
 #define ulong  unsigned long
 
 //BSSID const. length of 6 bytes; can be together with all the other types
